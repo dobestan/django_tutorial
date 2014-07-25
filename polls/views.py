@@ -14,11 +14,11 @@ def index(request):
   # via static template ( without python code )
   return HttpResponse(template)
 
-def detail(request, poll_id):
-  return HttpResponse("Detail of " + poll_id)
+def detail(request, question_id):
+  return HttpResponse("Detail of " + question_id)
 
-def results(request, poll_id):
-  return HttpResponse("Results of " + poll_id)
+def results(request, question_id):
+  return HttpResponse("Results of " + question_id)
 
-def vote(request, poll_id):
-  return HttpResponse("Vote of " + poll_id)
+def vote(request, question_id):
+  return HttpResponse("Vote of " + question_id)
