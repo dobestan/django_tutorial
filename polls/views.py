@@ -1,10 +1,18 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+from django.template import loader, RequestContext
+
 # Create your views here.
 
 def index(request):
-  return HttpResponse("Welcome to Polls App")
+  template = loader.get_template("polls/index.html")
+
+  # via HttpResponse
+  # return HttpResponse("Welcome to Polls App")
+
+  # via static template ( without python code )
+  return HttpResponse(template)
 
 def detail(request, poll_id):
   return HttpResponse("Detail of " + poll_id)
