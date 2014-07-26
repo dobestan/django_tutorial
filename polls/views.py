@@ -10,9 +10,6 @@ from polls.models import Question
 def index(request):
   template = loader.get_template("polls/index.html")
   questions = Question.objects.all()
-  context = RequestContext(request, {
-    "questions": questions
-  })
 
   # via HttpResponse
   # return HttpResponse("Welcome to Polls App")
@@ -28,7 +25,8 @@ def index(request):
   return render(request, "polls/index.html", { "questions": questions })
 
 def detail(request, question_id):
-  return HttpResponse("Detail of " + question_id)
+  question = Question.objects.get(pk=question_id)
+  return render(request, "polls/detail.html", { "question": question })
 
 def results(request, question_id):
   return HttpResponse("Results of " + question_id)
