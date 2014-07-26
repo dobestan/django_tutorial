@@ -1,15 +1,13 @@
-{% load staticfiles %}
-
-<link rel="stylesheet" href="{% static 'polls/style.css' %}" title="" type="" />
-
-<h1>Welcome to Polls App</h1>
-
-{% if questions %}
-  <ul>
-    {% for question in questions %}
-    <li><a href="{% url "polls:detail" question.id %}">{{ question.title }}</a></li>
-    {% endfor %}
-  </ul>
-{% else %}
-  <p>there is no question</p>
-{% endif %}
+{% extends "polls/base.html" %}
+{% block content %}
+  <h1>Welcome to Polls App</h1>
+  {% if questions %}
+    <ul>
+      {% for question in questions %}
+      <li><a href="{% url "polls:detail" question.id %}">{{ question.title }}</a></li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>there is no question</p>
+  {% endif %}
+{% endblock %}
