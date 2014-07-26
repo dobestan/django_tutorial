@@ -22,7 +22,10 @@ def index(request):
 
   # via dynamic template ( with python code)
   # but quite complex : should refactor later using render
-  return HttpResponse(template.render(context))
+  # return HttpResponse(template.render(context))
+
+  # via django.shortcuts render
+  return render(request, "polls/index.html", { "questions": questions })
 
 def detail(request, question_id):
   return HttpResponse("Detail of " + question_id)
