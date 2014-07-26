@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.core.urlresolvers import reverse
 
 from django.template import loader, RequestContext
 
@@ -29,7 +30,12 @@ def detail(request, question_id):
   return render(request, "polls/detail.html", { "question": question })
 
 def results(request, question_id):
-  return HttpResponse("Results of " + question_id)
+  question = Question.objects.get(pk=question_id)
+  return render(request, "polls/results.html", { "question": question })
 
 def vote(request, question_id):
-  return HttpResponse("Vote of " + question_id)
+  question = Question.objects.get(pk=question_id)
+  choice = question.choice_set.get(pk=request.POST["choice"])
+  choice.votes += 1
+  choice.save()
+  return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
